@@ -2,7 +2,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-900">
       {/* Navigation */}
-      <nav className="bg-gray-950 border-b border-gray-800">
+      <nav className="bg-neutral-950 border-b border-gray-800">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-xl font-medium text-gray-100 tracking-wide">
