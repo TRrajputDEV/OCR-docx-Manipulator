@@ -1,18 +1,18 @@
-import FileUpload from "./components/ui/FileUpload";
+// src/App.jsx
+import FileUpload from './components/ui/FileUpload'
+import './App.css'
+
 function App() {
   return (
-    <div className="min-h-screen bg-gray-900">
-
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 py-20">
-        <div className="container mx-auto px-6 text-center">
-          <FileUpload/>
-        </div>
-      </section>
-
-
+    <div className="min-h-screen bg-gray-100 py-8">
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-8 text-gray-800">
+          Document Upload Tool
+        </h1>
+        <FileUpload />
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
