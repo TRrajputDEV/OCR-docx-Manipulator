@@ -1,5 +1,6 @@
 import {ApiError} from '../utils/ApiError.js'
-
+import {ApiResponse} from '../utils/ApiResponse.js'
+import {asyncHandler} from '../utils/asyncHandler.js'
 const home = (req, res) => {
     res.send(`
         <html>
@@ -14,5 +15,11 @@ const home = (req, res) => {
     `);
 }
 
+const uploadFile = asyncHandler(async(req, res) =>{
+    
+    return res
+    .status(201)
+    .json(new ApiResponse(201, "doc uploaded i think... successfully"));
+})
 
-export{home} 
+export{home, uploadFile} 
