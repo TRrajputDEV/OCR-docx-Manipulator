@@ -1,9 +1,17 @@
 // set user route here
 import { Router } from "express";
-import {home, uploadFile} from '../controllers/user.controller.js'
+import {home, uploadFile, downloadFile} from '../controllers/user.controller.js'
+import {resizeImage,generateThumbnails} from '../controllers/processing.controller.js'
 import {upload} from '../middlewares/multer.middleware.js'
 const router = Router();
-
+// existing
 router.route('/home').post(home);
 router.route('/uploadfile').post(upload.single('file'), uploadFile);
+// New processing routes
+router.route('/resize-image').post(resizeImage);
+router.route('/generate-thumbnails').post(generateThumbnails);
+
+// Download route
+router.route('/download/:filename').get(downloadFile);
+
 export default router

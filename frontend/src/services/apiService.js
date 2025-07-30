@@ -23,3 +23,37 @@ export const uploadFile = async (file) => {
         throw error;
     }
 };
+// src/services/apiService.js - Add these functions
+export const resizeImage = async (fileId, width, height) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/resize-image`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fileId, width, height }),
+        });
+
+        if (!response.ok) throw new Error('Resize failed');
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const generateThumbnails = async (fileId) => {
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/generate-thumbnails`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ fileId }),
+        });
+
+        if (!response.ok) throw new Error('Thumbnail generation failed');
+        return await response.json();
+    } catch (error) {
+        throw error;
+    }
+};
