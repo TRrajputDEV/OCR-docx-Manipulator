@@ -1,7 +1,4 @@
 import sharp from 'sharp';
-import path from 'path';
-import fs from 'fs';
-
 class ImageService {
     // Image resizer
     static async resizeImage(

@@ -103,11 +103,11 @@ function FileUpload() {
         <div className="max-w-4xl mx-auto p-6">
             <div
                 className={`border-2 border-dashed rounded-lg p-12 text-center transition-all duration-300 cursor-pointer
-          ${isDragging
+            ${isDragging
                         ? 'border-blue-500 bg-blue-50 scale-105'
                         : 'border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50'
                     }
-          ${uploadStatus === 'uploading' ? 'pointer-events-none opacity-50' : ''}
+            ${uploadStatus === 'uploading' ? 'pointer-events-none opacity-50' : ''}
         `}
                 onDrop={handleDrop}
                 onDragOver={(e) => e.preventDefault()}
