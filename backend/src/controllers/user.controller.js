@@ -23,6 +23,8 @@ const uploadFile = asyncHandler(async (req, res) => {
         throw new ApiError(400, "No file uploaded");
     }
 
+    console.log("Uploaded file: ",req.file);
+
     const fileData = {
         filename: req.file.filename,
         originalName: req.file.originalname,
