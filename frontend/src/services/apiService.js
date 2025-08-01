@@ -17,7 +17,7 @@ export const uploadFile = async (file) => {
         }
 
         const data = await response.json();
-        console.log("File uploaded data: ",data);
+        console.log("File uploaded data: ", data);
         return data;
     } catch (error) {
         console.error('Upload error:', error);
@@ -55,6 +55,29 @@ export const generateThumbnails = async (fileId) => {
         if (!response.ok) throw new Error('Thumbnail generation failed');
         return await response.json();
     } catch (error) {
+        throw error;
+    }
+};
+
+
+export const extractText = async (file) => {
+    const formData = new FormData();
+    formData.append('file', file);
+    console.log(file)
+    try {
+        const response = await fetch(`${API_BASE_URL}/users/extract-text`, {
+            method: 'POST',
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Text extraction failed');
+        }
+
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('OCR error:', error);
         throw error;
     }
 };

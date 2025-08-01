@@ -1,7 +1,7 @@
 // set user route here
 import { Router } from "express";
 import {home, uploadFile, downloadFile} from '../controllers/user.controller.js'
-import {resizeImage,generateThumbnails} from '../controllers/processing.controller.js'
+import {resizeImage,generateThumbnails, extractText} from '../controllers/processing.controller.js'
 import {upload} from '../middlewares/multer.middleware.js'
 const router = Router();
 // existing
@@ -13,5 +13,8 @@ router.route('/generate-thumbnails').post(generateThumbnails);
 
 // Download route
 router.route('/download/:filename').get(downloadFile);
+
+// ocr route
+router.route("/extract-text").post(upload.single("file"), extractText);
 
 export default router

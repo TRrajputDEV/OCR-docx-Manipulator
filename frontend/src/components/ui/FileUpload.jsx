@@ -2,24 +2,31 @@
 import { useState } from 'react';
 import { uploadFile, resizeImage, generateThumbnails } from '../../services/apiService';
 
+// Supported file formats for upload
+const SUPPORTED_FORMATS = ['.pdf', '.docx', '.doc', '.jpg', '.jpeg', '.png', '.txt'];
+const IMAGE_FORMATS = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
+
 function FileUpload() {
     const [isDragging, setIsDragging] = useState(false);
-    const [uploadStatus, setUploadStatus] = useState('idle'); // idle, uploading, success, error
+    const [uploadStatus, setUploadStatus] = useState('idle');
     const [uploadedFile, setUploadedFile] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const [processedFiles, setProcessedFiles] = useState([]);
-    const [processingStatus, setProcessingStatus] = useState('idle'); // idle, processing, success, error
+    const [processingStatus, setProcessingStatus] = useState('idle');
     const [processingError, setProcessingError] = useState('');
+
+    const isImageFile = (filename) => {
+        if (!filename) return false;
+        const fileExtension = filename.toLowerCase().substring(filename.lastIndexOf('.'));
+        return IMAGE_FORMATS.includes(fileExtension);
+    };
 
     const handleFileUpload = async (file) => {
         if (!file) return;
 
         setUploadStatus('uploading');
         setErrorMessage('');
-        // Reset processing state when new file is uploaded
-        setProcessedFiles([]);
-        setProcessingStatus('idle');
-        setProcessingError('');
+        resetProcessingState();
 
         try {
             const result = await uploadFile(file);
@@ -29,6 +36,12 @@ function FileUpload() {
             setUploadStatus('error');
             setErrorMessage(error.message || 'Upload failed. Please try again.');
         }
+    };
+
+    const resetProcessingState = () => {
+        setProcessedFiles([]);
+        setProcessingStatus('idle');
+        setProcessingError('');
     };
 
     const handleDrop = (e) => {
@@ -91,12 +104,6 @@ function FileUpload() {
         setProcessedFiles([]);
         setProcessingStatus('idle');
         setProcessingError('');
-    };
-
-    const isImageFile = (filename) => {
-        if (!filename) return false;
-        const imageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp'];
-        return imageExtensions.some(ext => filename.toLowerCase().endsWith(ext));
     };
 
     return (
